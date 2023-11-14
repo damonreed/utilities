@@ -1,5 +1,4 @@
-REMOTE = "{{new-remote}}"
-
+REMOTE = "gcp"
 mkdir $REMOTE
 cd $REMOTE
 git init
