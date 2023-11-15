@@ -1,8 +1,9 @@
-REMOTE = "gcp"
-mkdir $REMOTE
-cd $REMOTE
+export REMOTE="gcp"
+# mkdir $REMOTE
+# cd $REMOTE
 git init
-git remote add origin https://github.com/damonreed/$REMOTE
 git add .
 git commit -m "Initial commit"
-git push origin master
+git branch -M main
+git remote add origin git@github.com:damonreed/gcp.git
+git push -u origin main
