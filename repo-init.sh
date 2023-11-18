@@ -1,7 +1,6 @@
 ##
 ## repo-init.sh
 ##
-
 export REPO="linux"
 export DESC="Notes and scripts for using linux"
 
