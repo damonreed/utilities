@@ -28,7 +28,7 @@ Host *
 EOF
 
 # install brew if not installed
-if ! command -v brew &> /dev/null
+if [ -f /opt/homebrew/bin/brew]
 then
     echo "brew not found, installing..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
