@@ -27,8 +27,8 @@ Host *
     IdentityFile ~/.ssh/id_rsa
 EOF
 
-# install brew if not installed
-if [ -f /opt/homebrew/bin/brew]
+# install brew if /opt/homebrew/bin/brew not installed
+if [ ! -f /opt/homebrew/bin/brew ];
 then
     echo "brew not found, installing..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
