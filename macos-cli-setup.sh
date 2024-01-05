@@ -34,6 +34,10 @@ then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
+# Add brew to path
+echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/$(whoami)/.zprofile
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # install iterm2 if not installed
 if ! command -v iterm2 &> /dev/null
 then
