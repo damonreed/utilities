@@ -1,11 +1,22 @@
 ##
-## utilities/macos-setup.sh - initialize ssh key and core utilities
+## utilities/macos-cli-setup.sh - setup basic toolset for cli and dev operations
 ##
 
-# scp {{KEY_LOCATION}} ~/.ssh/id_rsa || 
-# chmod 600 ~/.ssh/id_rsa
+# Create ~/.ssh if it doesn't exist with correct permissions
+mkdir -p ~/.ssh
+chmod 700 ~/.ssh
 
-# if no key - ssh-keygen -b 4096 -t rsa
+# If id_rsa is present in ./Downloads, copy it to ~/.ssh, else generate a new key
+if [ -f ~/Downloads/id_rsa ]; then
+    echo "id_rsa found in ~/Downloads, copying to ~/.ssh"
+    cp ~/Downloads/id_rsa ~/.ssh/id_rsa
+    chmod 600 ~/.ssh/id_rsa
+else
+    echo "id_rsa not found in ~/Downloads, generating new key"
+    ssh-keygen -b 4096 -t rsa -f ~/.ssh/id_rsa
+    # create public key
+    ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.pub
+fi
 
 # add key to keychain and config
 ssh-add --apple-use-keychain ~/.ssh/id_rsa
@@ -31,7 +42,11 @@ then
 fi
 
 # install xcode if not installed
-
+if ! command -v xcode-select &> /dev/null
+then
+    echo "xcode not found, installing..."
+    xcode-select --install
+fi
 
 # install github cli if not installed
 if ! command -v gh &> /dev/null
@@ -61,18 +76,18 @@ then
     brew install --cask visual-studio-code
 fi
 
-# install terraform if not installed
-if ! command -v terraform &> /dev/null
-then
-    echo "terraform not found, installing..."
-    brew install terraform
-fi
-
 # install docker if not installed
 if ! command -v docker &> /dev/null
 then
     echo "docker not found, installing..."
     brew install --cask docker
+fi
+
+# install terraform if not installed
+if ! command -v terraform &> /dev/null
+then
+    echo "terraform not found, installing..."
+    brew install terraform
 fi
 
 
