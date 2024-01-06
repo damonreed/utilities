@@ -2,14 +2,26 @@
 ## utilities/macos-cli-setup.sh - setup basic toolset for cli and dev operations
 ##
 
+#
+# UPDATE THESE VARIABLES WITH YOUR OWN INFORMATION
+#
+export NAME="Damon Reed"
+export EMAIL="dreed@nomadia.org"
+export OPEN_AI_API_KEY="sk-<your key here>"
+
+# Add OPEN_AI_API_KEY to ~/.zshrc
+cat << EOF >> ~/.zshrc
+export OPEN_AI_API_KEY=$OPEN_AI_API_KEY
+EOF
+
 # Create ~/.ssh if it doesn't exist with correct permissions
 mkdir -p ~/.ssh
 chmod 700 ~/.ssh
 
-# If id_rsa is present in ./Downloads, copy it to ~/.ssh, else generate a new key
+# If id_rsa is present in ./Downloads, move it to ~/.ssh, else generate a new key
 if [ -f ~/Downloads/id_rsa ]; then
     echo "id_rsa found in ~/Downloads, copying to ~/.ssh"
-    cp ~/Downloads/id_rsa ~/.ssh/id_rsa
+    mv ~/Downloads/id_rsa ~/.ssh/id_rsa
     chmod 600 ~/.ssh/id_rsa
 else
     echo "id_rsa not found in ~/Downloads, generating new key"
@@ -51,6 +63,14 @@ then
     echo "xcode not found, installing..."
     xcode-select --install
 fi
+
+# Make src directory if it doesn't exist, and clone damonreed/utilities from github repo
+mkdir -p ~/src
+cd ~/src
+git config --global user.email $EMAIL
+git config --global user.name $NAME
+git config --global pull.rebase false
+git clone https://github.com/damonreed/utilities.git
 
 # install github cli if not installed
 if ! command -v gh &> /dev/null
