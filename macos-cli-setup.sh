@@ -7,11 +7,11 @@
 #
 export NAME="Damon Reed"
 export EMAIL="dreed@nomadia.org"
-export OPEN_AI_API_KEY="sk-<your key here>"
+export OPENAI_API_KEY="sk-<your key here>"
 
 # Add OPEN_AI_API_KEY to ~/.zshrc
 cat << EOF >> ~/.zshrc
-export OPEN_AI_API_KEY=$OPEN_AI_API_KEY
+export OPENAI_API_KEY=$OPENAI_API_KEY
 EOF
 
 # Create ~/.ssh if it doesn't exist with correct permissions
