@@ -85,6 +85,7 @@ then
     echo "gcloud not found, installing..."
     brew install --cask google-cloud-sdk
 fi
+gcloud auth application-default login
 
 # install chrome if not installed
 if ! command -v google-chrome &> /dev/null
