@@ -15,19 +15,23 @@ export OPENAI_API_KEY=$OPENAI_API_KEY
 EOF
 
 # Create ~/.ssh if it doesn't exist with correct permissions
-mkdir -p ~/.ssh
-chmod 700 ~/.ssh
+mkdir -p ~/.ssh && chmod 700 ~/.ssh
 
-# If id_rsa is present in ./Downloads, move it to ~/.ssh, else generate a new key
+# If id_rsa is present in ~/Downloads, move it to ~/.ssh
 if [ -f ~/Downloads/id_rsa ]; then
     echo "id_rsa found in ~/Downloads, copying to ~/.ssh"
+    cp ~/.ssh/id_rsa ~/.ssh/id_rsa.bak
     mv ~/Downloads/id_rsa ~/.ssh/id_rsa
     chmod 600 ~/.ssh/id_rsa
-else
-    echo "id_rsa not found in ~/Downloads, generating new key"
+fi
+
+# If id_rsa is present in ~/Downloads or ~/.ssh, move it to ~/.ssh, else generate a new key
+if [ ! -f ~/.ssh/id_rsa ]; then
+    echo "id_rsa not found in ~/,ssh, generating new private and public keys"
     ssh-keygen -b 4096 -t rsa -f ~/.ssh/id_rsa
     # create public key
     ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.pub
+    cat ~/.ssh/id_rsa.pub
 fi
 
 # add key to keychain and config
