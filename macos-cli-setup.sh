@@ -2,6 +2,9 @@
 ## utilities/macos-cli-setup.sh - setup basic toolset for cli and dev operations
 ##
 
+# Curl command to install this script remotely:
+# curl -s https://raw.githubusercontent.com/damonreed/utilities/main/macos-cli-setup.sh | bash
+
 #
 # UPDATE THESE VARIABLES WITH YOUR OWN INFORMATION
 #
@@ -25,12 +28,13 @@ if [ -f ~/Downloads/id_rsa ]; then
     chmod 600 ~/.ssh/id_rsa
 fi
 
-# If id_rsa is present in ~/Downloads or ~/.ssh, move it to ~/.ssh, else generate a new key
+# If id_rsa is not present in ~/.ssh, generate a new key
 if [ ! -f ~/.ssh/id_rsa ]; then
     echo "id_rsa not found in ~/,ssh, generating new private and public keys"
     ssh-keygen -b 4096 -t rsa -f ~/.ssh/id_rsa
     # create public key
     ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.pub
+    echo "Your public key[~/.ssh/id_rsa.pub] is:"
     cat ~/.ssh/id_rsa.pub
 fi
 
