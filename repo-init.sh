@@ -1,8 +1,8 @@
 ##
 ## repo-init.sh
 ##
-export REPO="linux"
-export DESC="Notes and scripts for using linux"
+export REPO="py-packaging-tutorial"
+export DESC="Official Python Packaging Tutorial - my installation and notes"
 
 # Set up directory
 mkdir $REPO
@@ -11,13 +11,16 @@ cat > README.md << EOF
 # $REPO
 $DESC
 EOF
+curl -o .gitignore https://raw.githubusercontent.com/damonreed/utilities/main/.gitignore
+curl -o LICENSE https://raw.githubusercontent.com/damonreed/utilities/main/LICENSE
+
 
 # Create repo on github
 gh auth login
 gh repo list
 gh repo create $REPO -d "$DESC" --public
 
-# Create empty local repo w README and push to github
+# Create empty local repo w base files and push to github
 git init
 git add .
 git commit -m "Initial commit"
