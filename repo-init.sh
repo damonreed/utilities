@@ -15,7 +15,7 @@ EOF
 # Create repo on github
 gh auth login
 gh repo list
-gh repo create $REPO -d $DESC --public
+gh repo create $REPO -d "$DESC" --public
 
 # Create empty local repo w README and push to github
 git init
