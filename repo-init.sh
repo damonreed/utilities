@@ -1,8 +1,8 @@
 ##
 ## repo-init.sh
 ##
-export REPO="py-packaging-tutorial"
-export DESC="Official Python Packaging Tutorial - my installation and notes"
+export REPO="ncclient"
+export DESC="Python Netconf Client"
 
 # Set up directory
 mkdir $REPO
@@ -16,8 +16,8 @@ curl -o LICENSE https://raw.githubusercontent.com/damonreed/utilities/main/LICEN
 
 
 # Create repo on github
-gh auth login
-gh repo list
+# gh auth login
+# gh repo list
 gh repo create $REPO -d "$DESC" --public
 
 # Create empty local repo w base files and push to github
