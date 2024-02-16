@@ -1,0 +1,25 @@
+Write a python script to SSH into a NXOS device, issue the command "show ip route | json", 
+and insert the results into a pandas dataframe, then print the dataframe sorted by nexthop.
+
+Write a short python script to retrieve a value from a REST interface with header auth
+
+Write a Python program to find the maximum element in a list of integers.
+
+Given a list of words, write a function that returns the word that is most frequently occurring.
+
+Implement a simple web scraper using BeautifulSoup and Selenium to extract data from a website.
+
+Write a program to generate all possible permutations of a string.
+
+Given a list of numbers, implement a function that finds the number that is closest to a given target value.
+
+Implement a simple machine learning model using Scikit-learn to classify images based on their content.
+
+Write a Python program to simulate a random walk on a grid and compute the probability of being in a particular state after a certain number of steps.
+
+Given a list of integers, implement a function that finds the sum of all the numbers that are multiples of 3 or 5.
+
+Implement a simple game using Pygame where the user can input commands to control a character's movement and actions.
+
+Write a Python program to compute the Fibonacci sequence up to a given number of terms.
+
