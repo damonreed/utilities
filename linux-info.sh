@@ -12,7 +12,7 @@ lscpu | grep -E '^CPU\(s\)|Socket|Core|Thread'
 free -h | awk '/Mem:/ {print "Total memory:", $2}'
 df -h 
 
-# To update Ubuntu system:
-sudo apt-get --yes update
-sudo apt-get --yes upgrade
-sudo reboot
+# USB and block device information
+lsusb -t
+lsblk -o NAME,SIZE,MODEL,SERIAL,FSTYPE,MOUNTPOINT
+
