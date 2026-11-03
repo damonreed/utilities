@@ -1,18 +1,32 @@
-##
-## utilities/linux-info.sh
-##
+#!/bin/bash
+# utilities/linux-info.sh
 
-# System version
-# Show number of CPUs
-# View memory size
-# Check filesystem size
+# Run as root, with tee to a file
+# sudo ./linux-info.sh | tee -a linux-info.txt
+echo -e "# linux-info.sh - $(date) "
+echo -e "---"
 
-uname -snrvm
-lscpu | grep -E '^CPU\(s\)|Socket|Core|Thread'
-free -h | awk '/Mem:/ {print "Total memory:", $2}'
-df -h 
+echo -e "\n## Host summary"
+hostnamectl
+uptime -p
+uptime -s
 
-# USB and block device information
+echo -e "\n## CPU model and topology"
+lscpu | grep -E 'Model name|^CPU\(s\)|Socket|Core|Thread|MHz|Virtualization'
+
+echo -e "\n## Usable memory and swap"
+free -h
+
+echo -e "\n## Local filesystems only"
+df -hT -x tmpfs -x devtmpfs -x squashfs
+
+echo -e "\n## Disk type: TRAN is nvme/sata/usb, ROTA 1 means spinning"
+lsblk -o NAME,SIZE,ROTA,TRAN,MODEL,SERIAL,FSTYPE,MOUNTPOINT
+
+echo -e "\n## GPU and network"
+lspci -nn | grep -Ei 'vga|3d|display'
+ip -br addr
+ip route show default
+
+echo -e "\n## USB topology"
 lsusb -t
-lsblk -o NAME,SIZE,MODEL,SERIAL,FSTYPE,MOUNTPOINT
-
